@@ -12,30 +12,48 @@
 				</ul>
 			</div>
 			@endif
+            </div>
+      </div>
 
 			{!!Form::open(array('url'=>'sitios','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
+            <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="form-group">
             	<label for="nombre_finca">Nombre Finca</label>
-            	<input type="text" name="nombre_Finca" class="form-control"  placeholder="Nombre Finca...">
+            	<input type="text" name="nombre_finca" class="form-control"  placeholder="Nombre Finca...">
             </div>
-            <div class="form-group">
-            	<label for="id_admin">ID Administrador</label>
-            	<input type="text" name="id_admin" class="form-control"  placeholder="ID Administrador...">
-            	@include('administrador_finca.search')
             </div>
-            <div class="form-group">
-            	<label for="id_vereda">ID Vereda</label>
-            	<input type="text" name="id_vereda" class="form-control"  placeholder="ID Vereda...">
-            	@include('vereda.search')
+            <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                        <label for="id_admin">Nombre Administrador Finca</label>
+                        <select name="id_admin" class="form-control">
+                         @foreach ($admin as $ad) 
+                              <option name='id_admin' value="{{$ad->id_admin}}">{{$ad->nombres_admin}}</option>
+                         @endforeach    
+                        </select>
+                  </div>
             </div>
-            <div class="form-group">
-            	<label for="latitud">Latitud</label>
-            	<input type="text" name="latitud" class="form-control"  placeholder="Latitud...">
+            <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                        <label for="id_vereda">Nombre Vereda</label>
+                        <select name="id_vereda" class="form-control">
+                         @foreach ($vereda as $ver) 
+                              <option name='id_vereda' value="{{$ver->id_vereda}}">{{$ver->nombre_vereda}}</option>
+                         @endforeach    
+                        </select>
+                  </div>
             </div>
-            <div class="form-group">
-            	<label for="longitud">Longitud</label>
-            	<input type="text" name="longitud" class="form-control"  placeholder="Longitud...">
+            <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                  	<label for="latitud">Latitud</label>
+                  	<input type="text" name="latitud" class="form-control"  placeholder="Latitud...">
+                  </div>
+            </div>
+            <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                  	<label for="longitud">Longitud</label>
+                  	<input type="text" name="longitud" class="form-control"  placeholder="Longitud...">
+                  </div>
             </div>
             <div class="form-group">
             	<button class="btn btn-success" type="submit">Guardar</button>

@@ -21,7 +21,9 @@ class SitiosController extends Controller
     	if ($request)
     	{
     		$query=trim($request->get('searchText'));
-    		$sitios=DB::table('ubicacion')->where('nombre_finca','LIKE','%'.$query.'%')
+    		$sitios=DB::table('ubicacion as ub')->where('nombre_finca','LIKE','%'.$query.'%')
+            ->join('administrador_finca as ad','ub.id_admin','=','ad.id_admin')
+            ->join('vereda as ver','ub.id_vereda','=','ver.id_vereda')
             ->orwhere('nombre_finca','LIKE','%'.$query.'%')
     		->orderBy('nombre_finca','asc')
     		->paginate(6);
@@ -31,17 +33,18 @@ class SitiosController extends Controller
     }
     public function create()
     {
-    	return view("sitios.create");
+        $admin=DB::table('administrador_finca')->orderBy('nombres_admin','asc')->get();
+        $vereda=DB::table('vereda')->orderBy('nombre_vereda','asc')->get();
+    	return view("sitios.create",["admin"=>$admin,"vereda"=>$vereda]);
     }
     public function store(SitiosFormRequest $request)
     {
-    	$sitios=new sitios;
-        $sitios->id_ubicacion=$request->get('id_ubicacion');
+    	$sitios=new Sitios;
     	$sitios->nombre_finca=$request->get('nombre_finca');
     	$sitios->id_admin=$request->get('id_admin');
+        $sitios->id_vereda=$request->get('id_vereda');
     	$sitios->latitud=$request->get('latitud');
     	$sitios->longitud=$request->get('longitud');
-    	$sitios->id_vereda=$request->get('id_vereda');    	
     	$sitios->save();
     	return Redirect::to('sitios');
     }

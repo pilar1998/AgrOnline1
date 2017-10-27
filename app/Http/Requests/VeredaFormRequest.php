@@ -2,9 +2,9 @@
 
 namespace AgrOnline\Http\Requests;
 
-use AgrOnline\Http\Requests;
+use Illuminate\Foundation\Http\FormRequest;
 
-class ProductosFormRequest extends Request
+class VeredaFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class ProductosFormRequest extends Request
     public function rules()
     {
         return [
-            'nombre_producto'=>'required|max:20|unique:producto,nombre_producto'
+            'nombre_vereda'=>'required|max:20'
         ];
     }
 }

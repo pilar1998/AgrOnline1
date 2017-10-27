@@ -90,14 +90,17 @@
               <ul class="treeview-menu">
                 <li><a href="vereda"><i class="fa fa-circle-o"></i> Veredas</a></li>
                 <li><a href="sitios"><i class="fa fa-circle-o"></i> Lugares</a></li>
+                <li><a href="ProductoUbicacion"><i class="fa fa-circle-o"></i> Productos al Lugar</a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="productos">
-                <i class="fa fa-shopping-cart"></i>
+                <i class="fa fa-cubes"></i>
                 <span>Productos Agricolas</span>
               </a>
+
             </li>
+            
                        
             <li class="treeview">
               <a href="#">
@@ -105,7 +108,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="configuracion/usuario"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Usuarios</a></li>
                 
               </ul>
             </li>

@@ -4,7 +4,7 @@ namespace AgrOnline;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Administrador extends Model
+class Sitios extends Model
 {
     protected $table='ubicacion';
     protected $primaryKey='id_ubicacion';

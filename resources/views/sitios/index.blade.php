@@ -17,14 +17,18 @@
 						<th>Vereda</th>
 						<th>Latitud</th>
 						<th>Longitud</th>
+						<th>Cantidad Canastillas</th>
+						<th>Opciones</th>
 					</thead>
 					@foreach ($sitios as $sit)
 					<tr>
 						<td>{{$sit->id_ubicacion}}</td>
 						<td>{{$sit->nombre_finca}}</td>
-						<td>{{$sit->id_admin}}</td>
+						<td>{{$sit->nombres_admin}}</td>
+						<td>{{$sit->nombre_vereda}}</td>
 						<td>{{$sit->latitud}}</td>
 						<td>{{$sit->longitud}}</td>
+						<td>{{$sit->cantidadto}}</td>
 						<td>
 							<a href="{{URL::action('SitiosController@edit',$sit->id_ubicacion)}}"><button class="btn btn-success"><span class="fa fa-edit"></span>Editar</button></a>
 							<a href="" data-target="#modal-delete-{{$sit->id_ubicacion}}" data-toggle="modal"><button class="btn btn-danger"><span class="fa fa-remove"></span>Eliminar</button></a>

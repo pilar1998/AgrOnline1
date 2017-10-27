@@ -13,12 +13,14 @@
 					<thead>
 						<th>ID Producto</th>
 						<th>Nombre Producto</th>
+						<th>Cantidad Canastillas</th>
 						<th>Opciones</th>
 					</thead>
 					@foreach ($productos as $pro)
 					<tr>
 						<td>{{$pro->id_producto}}</td>
 						<td>{{$pro->nombre_producto}}</td>
+						<td>{{$pro->cantidad_total}}</td>
 						<td>
 							<a href="{{URL::action('ProductosController@edit',$pro->id_producto)}}"><button class="btn btn-success"><span class="fa fa-edit"></span>Editar</button></a>
 							<a href="" data-target="#modal-delete-{{$pro->id_producto}}" data-toggle="modal"><button class="btn btn-danger"><span class="fa fa-remove"></span>Eliminar</button></a>

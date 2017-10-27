@@ -21,10 +21,12 @@
             </div>
             <div class="form-group">
             	<button class="btn btn-success" type="submit">Guardar</button>
-            	<button class="btn btn-danger" type="reset">Cancelar</button>
+            {!!Form::close()!!}	
+            	<a href="'productos.index',['productos'=>$productos,'searchText'=>''" ><button class="btn btn-danger" type="reset" type="submit">Cancelar</button></a>
+
             </div>
 
-			{!!Form::close()!!}		
+				
             
 		</div>
 	</div>

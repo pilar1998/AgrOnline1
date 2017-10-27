@@ -16,18 +16,13 @@
 			{!!Form::open(array('url'=>'vereda','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
             <div class="form-group">
-            	<label for="id_vereda">ID Vereda</label>
-            	<input type="text" name="id_vereda" class="form-control" placeholder="ID Vereda...">
-            </div>
-            <div class="form-group">
             	<label for="nombre_vereda">Nombre Vereda</label>
             	<input type="text" name="nombre_vereda" class="form-control" placeholder="Nombre Vereda...">
             </div>
             <div class="form-group">
             	<button class="btn btn-success" type="submit">Guardar</button>
             	<button class="btn btn-danger" type="reset">Cancelar</button>
-            </div>
-            
+            </div>         
 
 			{!!Form::close()!!}		
             
