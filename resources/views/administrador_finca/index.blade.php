@@ -18,7 +18,7 @@
 					</thead>
 					@foreach ($administrador_finca as $ad)
 					<tr>
-						<td>{{$ad->id_admin}}</td>
+						<td>{{$ad->cedula}}</td>
 						<td>{{$ad->nombres_admin}}</td>
 						<td>{{$ad->apellidos_admin}}</td>
 						<td>

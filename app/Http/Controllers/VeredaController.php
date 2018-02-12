@@ -14,15 +14,16 @@ class VeredaController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
     public function index(Request $request)
     {
     	if ($request)
     	{
     		$query=trim($request->get('searchText'));
-    		$vereda=DB::table('vereda')->where('id_vereda','LIKE','%'.$query.'%')
-            ->orwhere('nombre_vereda','LIKE','%'.$query.'%')
+    		$vereda=DB::table('vereda')->where('nombre_vereda','LIKE','%'.$query.'%')
+            ->orwhere('municipio_vereda','LIKE','%'.$query.'%')
+            ->orwhere('departamento_vereda','LIKE','%'.$query.'%')
     		->orderBy('nombre_vereda','asc')
     		->paginate(6);        
     		return view('vereda.index',["vereda"=>$vereda,"searchText"=>$query]);
@@ -36,29 +37,32 @@ class VeredaController extends Controller
     {
     	$vereda=new Vereda;
     	$vereda->nombre_vereda=$request->get('nombre_vereda');
+        $vereda->municipio_vereda=$request->get('municipio_vereda');
+        $vereda->departamento_vereda=$request->get('departamento_vereda');
     	$vereda->save();
     	return Redirect::to('vereda');
     }
     public function show($id_vereda)
     {
-    	return view("administrador_finca.show",["administrador_finca"=>Administrador::findOrFail($id_vereda)]);
+    	return view("vereda.show",["vereda"=>vereda::findOrFail($id_vereda)]);
     }
     public function edit($id_vereda)
     {
-    	return view("administrador_finca.edit",["administrador_finca"=>Administrador::findOrFail($id_vereda)]);
+    	return view("vereda.edit",["vereda"=>vereda::findOrFail($id_vereda)]);
     }
     public function update(VeredaFormRequest $request,$id_vereda)
     {
-    	$administrador_finca=administrador::findOrFail($id_vereda);
-    	$administrador_finca->nombres_admin=$request->get('nombres_admin');
-    	$administrador_finca->apellidos_admin=$request->get('apellidos_admin');
-    	$administrador_finca->update();
-    	return Redirect::to('administrador_finca');
+    	$vereda=vereda::findOrFail($id_vereda);
+    	$vereda->nombre_vereda=$request->get('nombre_vereda');
+    	$vereda->municipio_vereda=$request->get('municipio_vereda');
+        $vereda->departamento_vereda=$request->get('departamento_vereda');
+    	$vereda->update();
+    	return Redirect::to('vereda');
     }
     public function destroy($id_vereda)
     {
-    	$administrador=Vereda::findOrFail($id_vereda);
-    	$administrador->destroy($id_vereda);
-    	return Redirect::to('administrador_finca');
+    	$vereda=Vereda::findOrFail($id_vereda);
+    	$vereda->destroy($id_vereda);
+    	return Redirect::to('vereda');
     }
 }

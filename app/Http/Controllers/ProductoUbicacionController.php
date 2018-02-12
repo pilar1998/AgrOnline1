@@ -13,20 +13,20 @@ class ProductoUbicacionController extends Controller
 {
      public function __construct()
     {
-
+        $this->middleware('auth');
     }
     public function index(Request $request)
     {
     	if ($request)
     	{
     		$query=trim($request->get('searchText'));
-    		$ubi_pro=DB::table('ubicacion_producto as up')->where('id_ubicacion_producto','LIKE','%'.$query.'%')
+    		$ubi_pro=DB::table('ubicacion_producto as up')
     		->join('producto as pro','up.id_producto','=','pro.id_producto')
     		->join('ubicacion as ub','up.id_ubicacion','=','ub.id_ubicacion')
-    		->orwhere('nombre_finca','LIKE','%'.$query.'%')
+    		->where('nombre_finca','LIKE','%'.$query.'%')
     		->orwhere('nombre_producto','LIKE','%'.$query.'%')
     		->orwhere('cantidad','LIKE','%'.$query.'%')
-    		->orderBy('id_ubicacion_producto','asc')
+    		->orderBy('nombre_producto','asc')
     		->paginate(6);
         
     		return view('ProductoUbicacion.index',["ubicacion_producto"=>$ubi_pro,"searchText"=>$query]);

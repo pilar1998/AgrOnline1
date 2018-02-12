@@ -24,6 +24,7 @@ class AdministradorFormRequest extends Request
     public function rules()
     {
         return [
+            'cedula'=>'required|max:15|unique:administrador_finca,cedula',
             'nombres_admin'=>'required|max:20',
             'apellidos_admin'=>'required|max:20'
         ];

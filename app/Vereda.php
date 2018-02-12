@@ -12,7 +12,9 @@ class Vereda extends Model
 
 
     protected $fillable=[
-    	'nombre_vereda'
+    	'nombre_vereda',
+    	'municipio_vereda',
+    	'departamento_vereda'
     ];
 
     protected $guardar =[

@@ -14,15 +14,15 @@ class ProductosController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
     public function index(Request $request)
     {
     	if ($request)
     	{
     		$query=trim($request->get('searchText'));
-    		$productos=DB::table('producto')->where('id_producto','LIKE','%'.$query.'%')
-            ->orwhere('nombre_producto','LIKE','%'.$query.'%')
+    		$productos=DB::table('producto')
+            ->where('nombre_producto','LIKE','%'.$query.'%')
     		->orderBy('nombre_producto','asc')
     		->paginate(6);
         
@@ -36,7 +36,6 @@ class ProductosController extends Controller
     public function store(productosFormRequest $request)
     {
     	$productos=new productos;
-        $productos->id_producto=$request->get('id_producto');
     	$productos->nombre_producto=$request->get('nombre_producto');
     	$productos->save();
     	return Redirect::to('productos');

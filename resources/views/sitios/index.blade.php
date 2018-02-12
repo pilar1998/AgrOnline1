@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered table-condensed table-hover">
 					<thead>
@@ -31,7 +31,7 @@
 						<td>{{$sit->cantidadto}}</td>
 						<td>
 							<a href="{{URL::action('SitiosController@edit',$sit->id_ubicacion)}}"><button class="btn btn-success"><span class="fa fa-edit"></span>Editar</button></a>
-							<a href="" data-target="#modal-delete-{{$sit->id_ubicacion}}" data-toggle="modal"><button class="btn btn-danger"><span class="fa fa-remove"></span>Eliminar</button></a>
+							<a href="" data-target="#modal-delete-{{$sit->id_ubicacion,$sit->nombre_finca}}" data-toggle="modal"><button class="btn btn-danger"><span class="fa fa-remove"></span>Eliminar</button></a>
 						</td>
 					</tr>
 					@include('sitios.modal')	

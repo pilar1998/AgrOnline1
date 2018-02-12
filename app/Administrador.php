@@ -12,6 +12,7 @@ class Administrador extends Model
 
 
     protected $fillable=[
+    	'cedula',
     	'nombres_admin',
     	'apellidos_admin'
     ];

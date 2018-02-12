@@ -13,11 +13,16 @@
 					<thead>
 						<th>ID Vereda</th>
 						<th>Nombre Vereda</th>
+						<th>Municipio Vereda</th>
+						<th>Departamento Vereda</th>
+						<th>Opciones</th>
 					</thead>
 					@foreach ($vereda as $ver)
 					<tr>
 						<td>{{$ver->id_vereda}}</td>
 						<td>{{$ver->nombre_vereda}}</td>
+						<td>{{$ver->municipio_vereda}}</td>
+						<td>{{$ver->departamento_vereda}}</td>
 						<td>
 							<a href="{{URL::action('VeredaController@edit',$ver->id_vereda)}}"><button class="btn btn-success"><span class="fa fa-edit"></span>Editar</button></a>
 							<a href="" data-target="#modal-delete-{{$ver->id_vereda}}" data-toggle="modal"><button class="btn btn-danger"><span class="fa fa-remove"></span>Eliminar</button></a>

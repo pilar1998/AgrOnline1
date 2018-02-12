@@ -12,9 +12,24 @@
 				</ul>
 			</div>
 			@endif
+                  <script>
+                        function validar(e) {
+                              tecla = (document.all) ? e.keyCode : e.which;
+                              if (tecla == 8)
+                                    return true;
+                              patron = /\d/;
+                              te = String.fromCharCode(tecla);
+                              return patron.test(te);
+                        }
+            
+                  </script>
 
 			{!!Form::model($administrador_finca,['method'=>'PATCH','route'=>['administrador_finca.update',$administrador_finca->id_admin]])!!}
             {{Form::token()}}
+            <div class="form-group">
+            	<label for="cedula">Cedula</label>
+            	<input type="text" name="cedula" class="form-control" value="{{$administrador_finca->cedula}}" placeholder="Nombres..." onkeypress="return validar(event)">
+            </div>
             <div class="form-group">
             	<label for="nombres_admin">Nombres</label>
             	<input type="text" name="nombres_admin" class="form-control" value="{{$administrador_finca->nombres_admin}}" placeholder="Nombres...">

@@ -21,7 +21,7 @@
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
 
-      <header class="main-header ">
+      <header class="main-header" >
 
         <!-- Logo -->
         <a href="administrador_finca" class="logo ">
@@ -53,7 +53,15 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="#" class="btn btn-success btn-flat">Cerrar</a>
+                     <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                        <span class="fa fa-sign-out"></span> Cerrar Sesion
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                     </div>
                   </li>
                 </ul>
@@ -65,7 +73,7 @@
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
+      <aside class="main-sidebar" >
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
@@ -75,7 +83,7 @@
             <li class="header"></li>
             
             <li class="treeview">
-              <a href="administrador_finca">
+              <a href="{{url('administrador_finca')}}">
                 <i class="fa fa-user"></i>
                 <span>Administrador Finca</span>
               </a>
@@ -88,13 +96,14 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="vereda"><i class="fa fa-circle-o"></i> Veredas</a></li>
-                <li><a href="sitios"><i class="fa fa-circle-o"></i> Lugares</a></li>
-                <li><a href="ProductoUbicacion"><i class="fa fa-circle-o"></i> Productos al Lugar</a></li>
+                <li><a href="{{url('mapa')}}"><i class="fa fa-circle-o"></i> Mapa</a></li>
+                <li><a href="{{url('vereda')}}"><i class="fa fa-circle-o"></i> Veredas</a></li>
+                <li><a href="{{url('sitios')}}"><i class="fa fa-circle-o"></i> Lugares</a></li>
+                <li><a href="{{url('ProductoUbicacion')}}"><i class="fa fa-circle-o"></i> Productos al Lugar</a></li>                
               </ul>
             </li>
             <li class="treeview">
-              <a href="productos">
+              <a href="{{url('productos')}}">
                 <i class="fa fa-cubes"></i>
                 <span>Productos Agricolas</span>
               </a>
@@ -172,12 +181,14 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <!--Fin-Contenido-->
-      <footer class="main-footer">
+      
+     <!-- <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 0.1
+          <b>Version</b> 2.3.0
         </div>
-        <strong>AgrOnline</strong>
-      </footer>
+        <strong>Copyright &copy; 2015-2020 <a href="www.incanatoit.com">IncanatoIT</a>.</strong> All rights reserved.
+      </footer>-->
+
 
       
     <!-- jQuery 2.1.4 -->

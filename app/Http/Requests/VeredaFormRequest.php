@@ -24,7 +24,9 @@ class VeredaFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre_vereda'=>'required|max:20'
+            'nombre_vereda'=>'required|max:20',
+            'municipio_vereda'=>'required|max:20',
+            'departamento_vereda'=>'required|max:20'
         ];
     }
 }

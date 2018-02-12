@@ -27,8 +27,8 @@ class SitiosFormRequest extends Request
         	'nombre_finca'=>'required|max:20',
         	'id_vereda'=>'required|max:10',
             'id_admin'=>'required|max:10',
-            'latitud'=>'required|max:10',
-            'longitud'=>'required|max:10'
+            'latitud'=>'required|max:15',
+            'longitud'=>'required|max:15'
         ];
     }
 }

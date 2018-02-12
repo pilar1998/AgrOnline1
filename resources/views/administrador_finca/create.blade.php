@@ -12,12 +12,23 @@
 				</ul>
 			</div>
 			@endif
+                  <script>
+                        function validar(e) {
+                              tecla = (document.all) ? e.keyCode : e.which;
+                              if (tecla == 8)
+                                    return true;
+                              patron = /\d/;
+                              te = String.fromCharCode(tecla);
+                              return patron.test(te);
+                        }
+            
+                  </script>
 
 			{!!Form::open(array('url'=>'administrador_finca','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
             <div class="form-group">
             	<label for="nombre">Cedula Administrador</label>
-            	<input type="text" name="id_admin" class="form-control" placeholder="Cedula...">
+            	<input type="text" name="cedula" class="form-control" placeholder="Cedula..." onkeypress="return validar(event)">
             </div>
             <div class="form-group">
             	<label for="nombre">Nombres Administrador</label>

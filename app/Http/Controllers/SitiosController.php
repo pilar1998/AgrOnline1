@@ -14,7 +14,7 @@ class SitiosController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
     public function index(Request $request)
     {
@@ -24,7 +24,8 @@ class SitiosController extends Controller
     		$sitios=DB::table('ubicacion as ub')->where('nombre_finca','LIKE','%'.$query.'%')
             ->join('administrador_finca as ad','ub.id_admin','=','ad.id_admin')
             ->join('vereda as ver','ub.id_vereda','=','ver.id_vereda')
-            ->orwhere('nombre_finca','LIKE','%'.$query.'%')
+            ->orwhere('nombre_vereda','LIKE','%'.$query.'%')
+            ->orwhere('nombres_admin','LIKE','%'.$query.'%')
     		->orderBy('nombre_finca','asc')
     		->paginate(6);
         
@@ -45,7 +46,13 @@ class SitiosController extends Controller
         $sitios->id_vereda=$request->get('id_vereda');
     	$sitios->latitud=$request->get('latitud');
     	$sitios->longitud=$request->get('longitud');
-    	$sitios->save();
+    	$sitios->save();        
+        $nuevoArchivo=fopen('..\..\..\..\..\xampp\htdocs\mapa\_'.$sitios->nombre_finca.'.php',"w+");
+        fwrite($nuevoArchivo, "<!DOCTYPE html >
+        <title>".$sitios->nombre_finca."  Muy Pronto</title>
+        <h1>Muy Pronto</h1>
+        </html>");
+        fclose($nuevoArchivo);
     	return Redirect::to('sitios');
     }
     public function show($id_ubicacion)
@@ -54,7 +61,10 @@ class SitiosController extends Controller
     }
     public function edit($id_ubicacion)
     {
-    	return view("sitios.edit",["sitios"=>sitios::findOrFail($id_ubicacion)]);
+        $ubicacion=Sitios::findOrFail($id_ubicacion);
+        $admin=DB::table('administrador_finca')->orderBy('nombres_admin','asc')->get();
+        $vereda=DB::table('vereda')->orderBy('nombre_vereda','asc')->get();
+    	return view("sitios.edit",["sitios"=>$ubicacion,"admin"=>$admin,"vereda"=>$vereda]);
     }
     public function update(SitiosFormRequest $request,$id_ubicacion)
     {
@@ -64,13 +74,20 @@ class SitiosController extends Controller
     	$sitios->latitud=$request->get('latitud');
     	$sitios->longitud=$request->get('longitud');
     	$sitios->id_vereda=$request->get('id_vereda');
+        $rename=$request->get('oldnombre_finca');
+        rename('..\..\..\..\..\xampp\htdocs\mapa\_'.$rename.'.php', '..\..\..\..\..\xampp\htdocs\mapa\_'.$sitios->nombre_finca.'.php');
     	$sitios->update();
     	return Redirect::to('sitios');
     }
     public function destroy($id_ubicacion)
     {
     	$sitios=sitios::findOrFail($id_ubicacion);
-    	$sitios->destroy($id_ubicacion);
+        $borrar=DB::table('ubicacion')->where ('id_ubicacion','=',$id_ubicacion)->get();
+        foreach ($borrar as $bo) {
+            $nombre=$bo->nombre_finca; 
+        }
+        unlink('..\..\..\..\..\xampp\htdocs\mapa\_'.$nombre.'.php');
+        $sitios->destroy($id_ubicacion);        
     	return Redirect::to('sitios');
     }
 }

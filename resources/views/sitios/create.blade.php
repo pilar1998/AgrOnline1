@@ -14,13 +14,54 @@
 			@endif
             </div>
       </div>
+            <script>
+                  function validar(e) {
+                        tecla = window.event ? window.event.keyCode : e.which;
+                        valor=document.getElementById('latitud').value;
+                        if (tecla == 8)
+                              return true;
+                        if (tecla==45 && valor.indexOf("-")==-1)
+                              document.getElementById('latitud').value="-"+valor;
+                        if (tecla==46 && valor.indexOf(".")==-1)
+                              return true;
+                        
+                        patron = /\d/;
+                        te = String.fromCharCode(tecla);
+                        return patron.test(te);
+                  }
+                  function validarl(e) {
+                        tecla = (document.all) ? e.keyCode : e.which;
+                        valor=document.getElementById('longitud').value;
+                        if (tecla==45 && valor.indexOf("-")==-1)
+                              document.getElementById('longitud').value="-"+valor;
+                        if (tecla==46 && valor.indexOf(".")==-1)
+                              return true;
+
+                        if (tecla == 8)
+                              return true;
+                        patron = /\d/;
+                        te = String.fromCharCode(tecla);
+                        return patron.test(te);
+                  }
+
+                  function validarlet(e) {
+                        tecla = window.event ? window.event.keyCode : e.which;
+                        if (tecla == 8)
+                              return true;
+                        
+                        patron = /[A-Za-z\s]/;
+                        te = String.fromCharCode(tecla);
+                        return patron.test(te);
+                  }
+      
+            </script>
 
 			{!!Form::open(array('url'=>'sitios','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
             <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="form-group">
             	<label for="nombre_finca">Nombre Finca</label>
-            	<input type="text" name="nombre_finca" class="form-control"  placeholder="Nombre Finca...">
+            	<input type="text" name="nombre_finca" class="form-control"  placeholder="Nombre Finca..." onkeypress="return validarlet(event);">
             </div>
             </div>
             <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -46,13 +87,13 @@
             <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
                   	<label for="latitud">Latitud</label>
-                  	<input type="text" name="latitud" class="form-control"  placeholder="Latitud...">
+                  	<input type="text" name="latitud" class="form-control"  id="latitud" placeholder="Latitud..."  onkeypress="return validar(event);">
                   </div>
             </div>
             <div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
                   	<label for="longitud">Longitud</label>
-                  	<input type="text" name="longitud" class="form-control"  placeholder="Longitud...">
+                  	<input type="text" name="longitud" class="form-control" id="longitud" placeholder="Longitud..."  onkeypress="return validarl(event);">
                   </div>
             </div>
             <div class="form-group">

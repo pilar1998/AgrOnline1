@@ -14,15 +14,16 @@ class AdministradorController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
     public function index(Request $request)
     {
     	if ($request)
     	{
     		$query=trim($request->get('searchText'));
-    		$administrador=DB::table('administrador_finca')->where('id_admin','LIKE','%'.$query.'%')
+    		$administrador=DB::table('administrador_finca')->where('cedula','LIKE','%'.$query.'%')
             ->orwhere('nombres_admin','LIKE','%'.$query.'%')
+            ->orwhere('apellidos_admin','LIKE','%'.$query.'%')
     		->orderBy('nombres_admin','asc')
     		->paginate(6);
         
@@ -36,10 +37,11 @@ class AdministradorController extends Controller
     public function store(AdministradorFormRequest $request)
     {
     	$administrador_finca=new administrador;
-        $administrador_finca->id_admin=$request->get('id_admin');
+        $administrador_finca->cedula=$request->get('cedula');
     	$administrador_finca->nombres_admin=$request->get('nombres_admin');
     	$administrador_finca->apellidos_admin=$request->get('apellidos_admin');
     	$administrador_finca->save();
+
     	return Redirect::to('administrador_finca');
     }
     public function show($id_admin)
@@ -53,9 +55,11 @@ class AdministradorController extends Controller
     public function update(AdministradorFormRequest $request,$id_admin)
     {
     	$administrador_finca=administrador::findOrFail($id_admin);
+        $administrador_finca->cedula=$request->get('cedula');
     	$administrador_finca->nombres_admin=$request->get('nombres_admin');
     	$administrador_finca->apellidos_admin=$request->get('apellidos_admin');
     	$administrador_finca->update();
+
     	return Redirect::to('administrador_finca');
     }
     public function destroy($id_admin)
